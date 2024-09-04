@@ -43,5 +43,43 @@ namespace CoreDataBaseAccessStyle_0.Controllers
             _db.SaveChanges();
             return RedirectToAction("GetCategories");
         }
+
+        public IActionResult UpdateCategory(int id)
+        {
+            Category c = _db.Categories.Find(id);
+            UpdateCategoryRequestModel uCVM = new()
+            {
+                CategoryName = c.CategoryName,
+                Description = c.Description,
+                CategoryId = c.CategoryId
+            };
+            
+
+            return View(uCVM);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCategory(UpdateCategoryRequestModel model)
+        {
+            
+            Category c = _db.Categories.Find(model.CategoryId);
+            c.CategoryId= model.CategoryId;
+            c.CategoryName = model.CategoryName;
+            c.Description = model.Description;
+
+            _db.SaveChanges();
+
+            return RedirectToAction("GetCategories");
+
+            
+        }
+
+        public IActionResult DeleteCategory(int id)
+        {
+            _db.Categories.Remove(_db.Categories.Find(id));
+            _db.SaveChanges();
+            return RedirectToAction("GetCategories");
+
+        }
     }
 }
