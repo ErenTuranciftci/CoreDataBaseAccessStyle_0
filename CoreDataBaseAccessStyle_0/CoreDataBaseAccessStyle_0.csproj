@@ -10,7 +10,6 @@
     <Folder Include="Models\Entities\" />
     <Folder Include="Models\ContextClasses\" />
     <Folder Include="Models\ViewModels\CategoryVMs\PageVMs\" />
-    <Folder Include="Models\ViewModels\CategoryVMs\PureVMs\RequestModels\" />
   </ItemGroup>
 
   <ItemGroup>

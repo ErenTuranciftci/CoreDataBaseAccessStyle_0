@@ -1,5 +1,6 @@
 ﻿using CoreDataBaseAccessStyle_0.Models.ContextClasses;
 using CoreDataBaseAccessStyle_0.Models.Entities;
+using CoreDataBaseAccessStyle_0.Models.ViewModels.CategoryVMs.PureVMs.RequestModels;
 using CoreDataBaseAccessStyle_0.Models.ViewModels.CategoryVMs.PureVMs.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,24 @@ namespace CoreDataBaseAccessStyle_0.Controllers
             }).ToList();
 
             return View(categories);
+        }
+
+        public IActionResult CreateCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateCategory(CreateCategoryRequestModel model)
+        {
+            Category c = new Category()
+            {
+                CategoryName = model.CategoryName,
+                Description = model.Description
+            };
+            _db.Categories.Add(c);
+            _db.SaveChanges();
+            return RedirectToAction("GetCategories");
         }
     }
 }
